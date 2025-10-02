@@ -1,35 +1,3 @@
 {
-  "pages": {
-    "/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/layout.css",
-      "static/chunks/app/layout.js"
-    ],
-    "/(calendar)/calendar/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(calendar)/calendar/page.js"
-    ],
-    "/api/votes/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/votes/route.js"
-    ],
-    "/(calendar)/calendar/[ticker]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(calendar)/calendar/[ticker]/page.js"
-    ],
-    "/api/stocks/search/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/stocks/search/route.js"
-    ],
-    "/api/stocks/[ticker]/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/stocks/[ticker]/route.js"
-    ]
-  }
+  "pages": {}
 }
