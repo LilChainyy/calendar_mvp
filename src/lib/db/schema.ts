@@ -22,6 +22,7 @@ export const events = pgTable('events', {
   impactScope: text('impact_scope').notNull(), // 'single_stock' | 'sector' | 'market'
   primaryTicker: text('primary_ticker'),
   affectedTickers: text('affected_tickers').array().notNull().default([]),
+  isFixedDate: text('is_fixed_date').notNull().default('false'), // 'true' | 'false' - whether the event date is fixed and cannot be moved
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
 }, (table) => ({

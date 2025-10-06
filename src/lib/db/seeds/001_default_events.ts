@@ -14,6 +14,7 @@ interface SeedEvent {
   impactScope: string
   primaryTicker?: string
   affectedTickers: string[]
+  isFixedDate?: string
 }
 
 async function seedDefaultEvents() {
@@ -32,7 +33,8 @@ async function seedDefaultEvents() {
         eventDate: new Date('2025-11-07T14:00:00'),
         category: 'fed_policy',
         impactScope: 'market',
-        affectedTickers: []
+        affectedTickers: [],
+        isFixedDate: 'true'
       },
       {
         title: 'FOMC Interest Rate Decision',
@@ -40,7 +42,8 @@ async function seedDefaultEvents() {
         eventDate: new Date('2025-12-18T14:00:00'),
         category: 'fed_policy',
         impactScope: 'market',
-        affectedTickers: []
+        affectedTickers: [],
+        isFixedDate: 'true'
       },
       {
         title: 'FOMC Interest Rate Decision',
@@ -48,7 +51,8 @@ async function seedDefaultEvents() {
         eventDate: new Date('2026-01-29T14:00:00'),
         category: 'fed_policy',
         impactScope: 'market',
-        affectedTickers: []
+        affectedTickers: [],
+        isFixedDate: 'true'
       },
 
       // ============ MAJOR ECONOMIC DATA RELEASES (Next 3 months) ============
@@ -58,7 +62,8 @@ async function seedDefaultEvents() {
         eventDate: new Date('2025-11-13T08:30:00'),
         category: 'economic_data',
         impactScope: 'market',
-        affectedTickers: []
+        affectedTickers: [],
+        isFixedDate: 'true'
       },
       {
         title: 'PCE Inflation Report - October',
@@ -66,7 +71,8 @@ async function seedDefaultEvents() {
         eventDate: new Date('2025-11-27T08:30:00'),
         category: 'economic_data',
         impactScope: 'market',
-        affectedTickers: []
+        affectedTickers: [],
+        isFixedDate: 'true'
       },
       {
         title: 'Jobs Report - November',
@@ -74,7 +80,8 @@ async function seedDefaultEvents() {
         eventDate: new Date('2025-12-06T08:30:00'),
         category: 'economic_data',
         impactScope: 'market',
-        affectedTickers: []
+        affectedTickers: [],
+        isFixedDate: 'true'
       },
 
       // ============ TOP 10 TECH STOCK EARNINGS (Q4 2025) ============
@@ -85,7 +92,8 @@ async function seedDefaultEvents() {
         category: 'earnings',
         impactScope: 'single_stock',
         primaryTicker: 'AAPL',
-        affectedTickers: ['AAPL']
+        affectedTickers: ['AAPL'],
+        isFixedDate: 'true'
       },
       {
         title: 'Microsoft Q1 FY2026 Earnings',
@@ -94,7 +102,8 @@ async function seedDefaultEvents() {
         category: 'earnings',
         impactScope: 'single_stock',
         primaryTicker: 'MSFT',
-        affectedTickers: ['MSFT']
+        affectedTickers: ['MSFT'],
+        isFixedDate: 'true'
       },
       {
         title: 'Meta Q3 2025 Earnings',
@@ -103,7 +112,8 @@ async function seedDefaultEvents() {
         category: 'earnings',
         impactScope: 'single_stock',
         primaryTicker: 'META',
-        affectedTickers: ['META']
+        affectedTickers: ['META'],
+        isFixedDate: 'true'
       },
       {
         title: 'Amazon Q3 2025 Earnings',
@@ -112,7 +122,8 @@ async function seedDefaultEvents() {
         category: 'earnings',
         impactScope: 'single_stock',
         primaryTicker: 'AMZN',
-        affectedTickers: ['AMZN']
+        affectedTickers: ['AMZN'],
+        isFixedDate: 'true'
       },
       {
         title: 'NVIDIA Q3 FY2026 Earnings',
@@ -121,7 +132,8 @@ async function seedDefaultEvents() {
         category: 'earnings',
         impactScope: 'single_stock',
         primaryTicker: 'NVDA',
-        affectedTickers: ['NVDA']
+        affectedTickers: ['NVDA'],
+        isFixedDate: 'true'
       },
       {
         title: 'Alphabet Q3 2025 Earnings',
@@ -130,7 +142,8 @@ async function seedDefaultEvents() {
         category: 'earnings',
         impactScope: 'single_stock',
         primaryTicker: 'GOOGL',
-        affectedTickers: ['GOOGL', 'GOOG']
+        affectedTickers: ['GOOGL', 'GOOG'],
+        isFixedDate: 'true'
       },
       {
         title: 'Tesla Q3 2025 Earnings',
@@ -139,7 +152,8 @@ async function seedDefaultEvents() {
         category: 'earnings',
         impactScope: 'single_stock',
         primaryTicker: 'TSLA',
-        affectedTickers: ['TSLA']
+        affectedTickers: ['TSLA'],
+        isFixedDate: 'true'
       },
 
       // ============ ADDITIONAL NOTABLE EVENTS ============
@@ -149,7 +163,8 @@ async function seedDefaultEvents() {
         eventDate: new Date('2025-11-16T08:30:00'),
         category: 'economic_data',
         impactScope: 'market',
-        affectedTickers: []
+        affectedTickers: [],
+        isFixedDate: 'true'
       },
       {
         title: 'GDP Q3 2025 Final Estimate',
@@ -157,7 +172,8 @@ async function seedDefaultEvents() {
         eventDate: new Date('2025-11-21T08:30:00'),
         category: 'economic_data',
         impactScope: 'market',
-        affectedTickers: []
+        affectedTickers: [],
+        isFixedDate: 'true'
       },
       {
         title: 'Consumer Confidence Index',
@@ -165,7 +181,60 @@ async function seedDefaultEvents() {
         eventDate: new Date('2025-11-26T10:00:00'),
         category: 'economic_data',
         impactScope: 'market',
-        affectedTickers: []
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+
+      // ============ ROBINHOOD (HOOD) SPECIFIC EVENTS ============
+      {
+        title: 'Robinhood Q3 2025 Earnings',
+        description: 'Robinhood Markets reports Q3 2025 earnings. Focus on trading volume, crypto revenue growth, and monthly active users. EPS est: $0.18.',
+        eventDate: new Date('2025-10-30T16:00:00'),
+        category: 'earnings',
+        impactScope: 'single_stock',
+        primaryTicker: 'HOOD',
+        affectedTickers: ['HOOD'],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'SEC Crypto Regulation Announcement',
+        description: 'SEC expected to announce new cryptocurrency trading regulations affecting retail brokerages like Robinhood and Coinbase.',
+        eventDate: new Date('2025-11-12T10:00:00'),
+        category: 'regulatory',
+        impactScope: 'sector',
+        primaryTicker: 'HOOD',
+        affectedTickers: ['HOOD', 'COIN'],
+        isFixedDate: 'false'
+      },
+      {
+        title: 'Robinhood Options Trading Expansion',
+        description: 'Robinhood announces expansion of options trading features and new derivative products to compete with traditional brokerages.',
+        eventDate: new Date('2025-11-05T09:00:00'),
+        category: 'corporate_action',
+        impactScope: 'single_stock',
+        primaryTicker: 'HOOD',
+        affectedTickers: ['HOOD'],
+        isFixedDate: 'false'
+      },
+      {
+        title: 'Fintech Innovation Summit',
+        description: 'Annual fintech conference where Robinhood CEO expected to speak on retail trading trends and industry disruption.',
+        eventDate: new Date('2025-11-22T09:00:00'),
+        category: 'corporate_action',
+        impactScope: 'sector',
+        primaryTicker: 'HOOD',
+        affectedTickers: ['HOOD', 'SQ', 'PYPL'],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'Robinhood User Growth Report',
+        description: 'Robinhood scheduled to release Q3 monthly active user (MAU) statistics, account funding data, and assets under custody metrics.',
+        eventDate: new Date('2025-10-25T12:00:00'),
+        category: 'corporate_action',
+        impactScope: 'single_stock',
+        primaryTicker: 'HOOD',
+        affectedTickers: ['HOOD'],
+        isFixedDate: 'true'
       },
     ]
 

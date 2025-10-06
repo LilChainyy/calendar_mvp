@@ -103,6 +103,12 @@ async function seedStocks() {
         type: 'stock',
         sector: 'Financial'
       },
+      {
+        ticker: 'HOOD',
+        name: 'Robinhood Markets Inc.',
+        type: 'stock',
+        sector: 'Financial'
+      },
 
       // ============ ADDITIONAL TECH ============
       {

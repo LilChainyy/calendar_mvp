@@ -11,7 +11,8 @@
     "affected_tickers": ["AAPL"],
     "certainty_level": "confirmed",
     "source_url": "https://investor.apple.com",
-    "is_default": true
+    "is_default": true,
+    "is_fixed_date": true
   },
   {
     "id": "2",
@@ -23,7 +24,8 @@
     "impact_scope": "market",
     "affected_tickers": [],
     "certainty_level": "confirmed",
-    "is_default": true
+    "is_default": true,
+    "is_fixed_date": true
   },
   {
     "id": "3",
@@ -36,7 +38,8 @@
     "primary_ticker": "TSLA",
     "affected_tickers": ["TSLA"],
     "certainty_level": "confirmed",
-    "is_default": true
+    "is_default": true,
+    "is_fixed_date": true
   },
   {
     "id": "4",
@@ -48,7 +51,8 @@
     "impact_scope": "market",
     "affected_tickers": [],
     "certainty_level": "confirmed",
-    "is_default": true
+    "is_default": true,
+    "is_fixed_date": true
   },
   {
     "id": "5",
@@ -60,7 +64,8 @@
     "primary_ticker": "NVDA",
     "affected_tickers": ["NVDA", "AMD"],
     "certainty_level": "speculative",
-    "is_default": true
+    "is_default": true,
+    "is_fixed_date": false
   },
   {
     "id": "6",
@@ -72,7 +77,8 @@
     "primary_ticker": "PFE",
     "affected_tickers": ["PFE"],
     "certainty_level": "confirmed",
-    "is_default": true
+    "is_default": true,
+    "is_fixed_date": true
   },
   {
     "id": "7",
@@ -84,7 +90,8 @@
     "impact_scope": "market",
     "affected_tickers": [],
     "certainty_level": "confirmed",
-    "is_default": true
+    "is_default": true,
+    "is_fixed_date": true
   },
   {
     "id": "8",
@@ -97,7 +104,8 @@
     "primary_ticker": "MSFT",
     "affected_tickers": ["MSFT"],
     "certainty_level": "confirmed",
-    "is_default": true
+    "is_default": true,
+    "is_fixed_date": true
   },
   {
     "id": "9",
@@ -109,7 +117,8 @@
     "primary_ticker": "GOOGL",
     "affected_tickers": ["GOOGL"],
     "certainty_level": "speculative",
-    "is_default": true
+    "is_default": true,
+    "is_fixed_date": false
   },
   {
     "id": "10",
@@ -121,7 +130,8 @@
     "impact_scope": "market",
     "affected_tickers": [],
     "certainty_level": "confirmed",
-    "is_default": true
+    "is_default": true,
+    "is_fixed_date": true
   },
   {
     "id": "11",
@@ -133,7 +143,8 @@
     "primary_ticker": "AMZN",
     "affected_tickers": ["AMZN"],
     "certainty_level": "confirmed",
-    "is_default": true
+    "is_default": true,
+    "is_fixed_date": false
   },
   {
     "id": "12",
@@ -145,7 +156,8 @@
     "impact_scope": "market",
     "affected_tickers": [],
     "certainty_level": "confirmed",
-    "is_default": true
+    "is_default": true,
+    "is_fixed_date": true
   },
   {
     "id": "13",
@@ -157,7 +169,8 @@
     "primary_ticker": "META",
     "affected_tickers": ["META"],
     "certainty_level": "speculative",
-    "is_default": true
+    "is_default": true,
+    "is_fixed_date": false
   },
   {
     "id": "14",
@@ -169,7 +182,8 @@
     "impact_scope": "market",
     "affected_tickers": [],
     "certainty_level": "confirmed",
-    "is_default": true
+    "is_default": true,
+    "is_fixed_date": true
   },
   {
     "id": "15",
@@ -180,6 +194,77 @@
     "impact_scope": "sector",
     "affected_tickers": ["XLE"],
     "certainty_level": "confirmed",
-    "is_default": true
+    "is_default": true,
+    "is_fixed_date": true
+  },
+  {
+    "id": "16",
+    "title": "Q3 Earnings - HOOD",
+    "description": "Robinhood Markets reports Q3 2025 earnings. Focus on trading volume and crypto revenue growth.",
+    "event_date": "2025-10-30",
+    "event_time": "16:00:00",
+    "category": "earnings",
+    "impact_scope": "single_stock",
+    "primary_ticker": "HOOD",
+    "affected_tickers": ["HOOD"],
+    "certainty_level": "confirmed",
+    "source_url": "https://investors.robinhood.com",
+    "is_default": true,
+    "is_fixed_date": true
+  },
+  {
+    "id": "17",
+    "title": "SEC Crypto Regulation Announcement",
+    "description": "SEC expected to announce new cryptocurrency trading regulations affecting retail brokerages.",
+    "event_date": "2025-11-12",
+    "event_time": "10:00:00",
+    "category": "regulatory",
+    "impact_scope": "sector",
+    "primary_ticker": "HOOD",
+    "affected_tickers": ["HOOD", "COIN"],
+    "certainty_level": "speculative",
+    "is_default": true,
+    "is_fixed_date": false
+  },
+  {
+    "id": "18",
+    "title": "HOOD Options Trading Expansion",
+    "description": "Robinhood announces expansion of options trading features and new derivative products.",
+    "event_date": "2025-11-05",
+    "category": "corporate_action",
+    "impact_scope": "single_stock",
+    "primary_ticker": "HOOD",
+    "affected_tickers": ["HOOD"],
+    "certainty_level": "speculative",
+    "is_default": true,
+    "is_fixed_date": false
+  },
+  {
+    "id": "19",
+    "title": "Fintech Innovation Summit",
+    "description": "Annual fintech conference where HOOD CEO expected to speak on retail trading trends.",
+    "event_date": "2025-11-22",
+    "event_time": "09:00:00",
+    "category": "corporate_action",
+    "impact_scope": "sector",
+    "primary_ticker": "HOOD",
+    "affected_tickers": ["HOOD", "SQ", "PYPL"],
+    "certainty_level": "confirmed",
+    "is_default": true,
+    "is_fixed_date": true
+  },
+  {
+    "id": "20",
+    "title": "HOOD User Growth Report",
+    "description": "Robinhood scheduled to release Q3 monthly active user (MAU) statistics and account funding data.",
+    "event_date": "2025-10-25",
+    "event_time": "12:00:00",
+    "category": "corporate_action",
+    "impact_scope": "single_stock",
+    "primary_ticker": "HOOD",
+    "affected_tickers": ["HOOD"],
+    "certainty_level": "confirmed",
+    "is_default": true,
+    "is_fixed_date": true
   }
 ]

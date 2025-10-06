@@ -22,6 +22,7 @@ export interface Event {
   certainty_level: 'confirmed' | 'speculative'
   source_url?: string
   is_default: boolean
+  is_fixed_date: boolean
 }
 
 export interface VoteAggregate {

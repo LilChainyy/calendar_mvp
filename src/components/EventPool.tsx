@@ -3,6 +3,7 @@
 import { Event } from '@/lib/types'
 import { useEventSearch, EventFilters } from '@/hooks/useEventSearch'
 import EventBlock from './EventBlock'
+import { useState, useMemo } from 'react'
 
 interface Props {
   events: Event[]
@@ -12,8 +13,30 @@ interface Props {
   onEventClick: (id: string) => void
 }
 
+type SortOption = 'date-asc' | 'date-desc' | 'name-asc' | 'name-desc' | 'category'
+
 export default function EventPool({ events, filters, userVotes, onFiltersChange, onEventClick }: Props) {
   const { searchQuery, setSearchQuery, filteredEvents, resultCount } = useEventSearch(events, filters)
+  const [sortBy, setSortBy] = useState<SortOption>('date-asc')
+
+  const sortedEvents = useMemo(() => {
+    const sorted = [...filteredEvents]
+
+    switch (sortBy) {
+      case 'date-asc':
+        return sorted.sort((a, b) => new Date(a.event_date).getTime() - new Date(b.event_date).getTime())
+      case 'date-desc':
+        return sorted.sort((a, b) => new Date(b.event_date).getTime() - new Date(a.event_date).getTime())
+      case 'name-asc':
+        return sorted.sort((a, b) => a.title.localeCompare(b.title))
+      case 'name-desc':
+        return sorted.sort((a, b) => b.title.localeCompare(a.title))
+      case 'category':
+        return sorted.sort((a, b) => a.category.localeCompare(b.category))
+      default:
+        return sorted
+    }
+  }, [filteredEvents, sortBy])
 
   return (
     <div className="h-full flex flex-col bg-white border-l">
@@ -64,18 +87,30 @@ export default function EventPool({ events, filters, userVotes, onFiltersChange,
           className="w-full px-3 py-1.5 border rounded text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
 
+        <select
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value as SortOption)}
+          className="w-full px-3 py-1.5 border rounded text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="date-asc">Sort: Date (Earliest First)</option>
+          <option value="date-desc">Sort: Date (Latest First)</option>
+          <option value="name-asc">Sort: Name (A-Z)</option>
+          <option value="name-desc">Sort: Name (Z-A)</option>
+          <option value="category">Sort: Category</option>
+        </select>
+
         <div className="text-xs text-gray-500">
           {resultCount} {resultCount === 1 ? 'event' : 'events'} found
         </div>
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-2">
-        {filteredEvents.length === 0 ? (
+        {sortedEvents.length === 0 ? (
           <div className="text-center text-gray-400 text-sm py-8">
             No events found
           </div>
         ) : (
-          filteredEvents.map(event => (
+          sortedEvents.map(event => (
             <EventBlock
               key={event.id}
               id={event.id}
@@ -86,7 +121,8 @@ export default function EventPool({ events, filters, userVotes, onFiltersChange,
               tickers={event.affected_tickers}
               userVote={userVotes.get(event.id) || null}
               onClick={onEventClick}
-              draggable={true}
+              draggable={!event.is_fixed_date}
+              isFixedDate={event.is_fixed_date}
             />
           ))
         )}

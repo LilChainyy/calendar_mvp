@@ -1,0 +1,1 @@
+ALTER TABLE "events" ADD COLUMN "is_fixed_date" text DEFAULT 'false' NOT NULL;

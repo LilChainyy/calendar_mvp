@@ -183,7 +183,7 @@ export default function CalendarGrid({ events, userId, filters, userVotes, onEve
   }
 
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-5xl mx-auto px-4">
       <div className="mb-4 text-xl font-semibold">
         {format(currentDate, 'MMMM yyyy')}
       </div>
@@ -250,6 +250,8 @@ export default function CalendarGrid({ events, userId, filters, userVotes, onEve
                       userVote={userVotes.get(event.id) || null}
                       onClick={handleEventClick}
                       isPlaced={isPlaced}
+                      draggable={!event.is_fixed_date}
+                      isFixedDate={event.is_fixed_date}
                       onDragStart={() => {
                         setIsDragging(true)
                         setDraggedPlacement({ eventId: event.id, date: dateStr })

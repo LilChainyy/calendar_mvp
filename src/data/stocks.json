@@ -248,5 +248,10 @@
     "symbol": "CAT",
     "name": "Caterpillar Inc.",
     "sector": "Industrials"
+  },
+  {
+    "symbol": "HOOD",
+    "name": "Robinhood Markets Inc.",
+    "sector": "Financial Services"
   }
 ]
