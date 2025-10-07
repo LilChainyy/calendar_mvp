@@ -13,7 +13,7 @@ export default function LandingPage() {
             Track, organize, and vote on market-moving events. Stay ahead of earnings, Fed policy, and economic data releases.
           </p>
           <Link
-            href="/calendar"
+            href="/onboarding"
             className="inline-block px-8 py-4 bg-blue-600 text-white text-lg font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
           >
             Get Started →
@@ -96,12 +96,20 @@ export default function LandingPage() {
 
         {/* CTA */}
         <div className="text-center mt-16">
-          <Link
-            href="/calendar"
-            className="inline-block px-8 py-4 bg-blue-600 text-white text-lg font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
-          >
-            Open Calendar →
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="/onboarding"
+              className="inline-block px-8 py-4 bg-blue-600 text-white text-lg font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
+            >
+              Personalize Your Calendar →
+            </Link>
+            <Link
+              href="/calendar"
+              className="inline-block px-8 py-4 bg-white text-gray-700 text-lg font-semibold rounded-lg hover:bg-gray-50 transition-colors border-2 border-gray-300"
+            >
+              Skip to Calendar
+            </Link>
+          </div>
         </div>
       </div>
     </main>

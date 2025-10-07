@@ -355,6 +355,96 @@ This document contains the instructions for specialized sub-agents used througho
 
 ---
 
+## 13. onboarding-flow-designer
+
+**Purpose**: Build user onboarding experiences, multi-step questionnaires, preference collection systems, and recommendation engines. Expert in progressive disclosure patterns, form design, user profiling, and personalized recommendations based on user inputs.
+
+**When to use**:
+- Creating landing pages with questionnaires or preference collection forms
+- Building multi-step onboarding flows with progress indicators
+- Designing slider-based, multiple-choice, or rating-scale input interfaces
+- Implementing recommendation engines based on user preferences
+- Creating user profiling systems from questionnaire responses
+- Building "getting started" wizards or guided tours
+- Designing personalized content suggestions based on user inputs
+- Implementing A/B testing for onboarding flows
+
+**Example tasks**:
+- "Add a landing page that asks users 5 questions about their investment preferences with sliders from 1-5, then recommends stocks based on their answers"
+- "Create a quiz that asks about risk tolerance, investment goals, and preferred sectors, then shows personalized stock recommendations"
+- "Build a 3-step onboarding process that collects user preferences about trading frequency, favorite companies, and notification settings"
+- "Implement a preference-based recommendation engine for stock suggestions"
+
+**Key responsibilities**:
+- Questionnaire UI design (sliders, multiple choice, ratings, dropdowns)
+- Progress indicators and multi-step navigation
+- Client-side validation for questionnaire inputs
+- Recommendation algorithms and matching logic
+- User preference storage in database
+- Onboarding analytics and tracking
+- Skip/later options and progressive disclosure
+- Onboarding completion state management
+
+**Do NOT use for**:
+- Basic user authentication (login/register/JWT) → Use `auth-specialist`
+- Simple contact forms or feedback forms → Use `general-purpose`
+- Calendar-specific UI components → Use `calendar-layout-designer`
+- Database schema design for user tables → Use `database-schema-architect`
+- Third-party OAuth integration → Use `portfolio-integration-specialist`
+
+---
+
+## 14. portfolio-integration-specialist
+
+**Purpose**: Implement third-party brokerage API integrations, OAuth flows for financial services, portfolio synchronization, and real-time position tracking. Expert in Robinhood API, TD Ameritrade, E*TRADE, and other brokerage APIs. Handles secure financial data, API rate limiting, data normalization across brokers, and portfolio reconciliation.
+
+**When to use**:
+- Integrating third-party brokerage APIs (Robinhood, TD Ameritrade, E*TRADE, Fidelity, Schwab)
+- Implementing OAuth flows specifically for financial services
+- Syncing user portfolio holdings from external accounts
+- Building "Connect Your Broker" features
+- Fetching real-time positions, balances, or trade history from brokerages
+- Normalizing portfolio data across different broker formats
+- Handling API rate limits for financial data providers
+- Implementing portfolio refresh/sync mechanisms
+- Creating fallback flows for manual portfolio entry
+- Reconciling external holdings with internal data
+
+**Example tasks**:
+- "Let users link their Robinhood account and import their portfolio so the calendar shows only stocks they own"
+- "Add support for users to connect their TD Ameritrade, E*TRADE, or Robinhood accounts and import their holdings"
+- "Users should be able to refresh their portfolio holdings to see updated positions from their brokerage account"
+- "Implement manual stock selection alternative for users who don't want to connect external accounts"
+
+**Key responsibilities**:
+- OAuth 2.0 flows for Robinhood, TD Ameritrade, E*TRADE APIs
+- Brokerage API authentication and token refresh
+- Portfolio data fetching (positions, balances, trade history)
+- Data normalization across different broker response formats
+- API rate limit handling and retry logic
+- Secure storage of API tokens and credentials
+- Error handling for API failures
+- Manual portfolio entry fallback UI
+- Webhook handling for real-time position updates
+- Portfolio sync scheduling
+
+**Security considerations**:
+- Encrypt API tokens at rest
+- Never log sensitive financial data
+- Follow PCI-DSS guidelines
+- Implement proper OAuth scope management
+- Secure credential storage (environment variables)
+
+**Do NOT use for**:
+- Internal user authentication (login/register) → Use `auth-specialist`
+- Simple onboarding questionnaires → Use `onboarding-flow-designer`
+- Manual stock selection UI → Use `stock-search-navigator`
+- Calendar filtering by user portfolio → Use `general-purpose`
+- Database schema for storing portfolios → Use `database-schema-architect`
+- Stock price data fetching (non-brokerage APIs) → Use `general-purpose`
+
+---
+
 ## General Usage Guidelines
 
 1. **When to use these agents**: Use these specialized agents when working on features within their domain. For example, if you're working on the calendar grid layout, use `calendar-layout-designer`. If you're implementing vote submission, use `voting-api-handler`.
@@ -397,6 +487,7 @@ This document contains the instructions for specialized sub-agents used througho
 - events (calendar events)
 - votes (user votes on events)
 - placements (user calendar customization)
+- user_preferences (onboarding questionnaire responses)
 
 **Key Conventions**:
 - Frontend uses snake_case (event_date, impact_scope)

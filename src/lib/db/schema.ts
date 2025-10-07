@@ -61,6 +61,21 @@ export const placements = pgTable('placements', {
   eventIdx: index('placement_event_idx').on(table.eventId),
 }))
 
+export const userPreferences = pgTable('user_preferences', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  userId: text('user_id').notNull(),
+  sectors: text('sectors').array().notNull().default([]),
+  investmentTimeline: text('investment_timeline').notNull(), // '1' | '2' | '3' | '4' | '5'
+  checkFrequency: text('check_frequency').notNull(), // 'multiple_daily' | 'daily' | 'few_weekly' | 'weekly' | 'monthly'
+  riskTolerance: text('risk_tolerance').notNull(), // '1' | '2' | '3' | '4' | '5'
+  portfolioStrategy: text('portfolio_strategy').notNull(), // 'celebrity' | 'diy' | 'mix'
+  completedAt: timestamp('completed_at', { withTimezone: true }).notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => ({
+  userIdIdx: index('user_id_idx').on(table.userId),
+}))
+
 export type Stock = typeof stocks.$inferSelect
 export type NewStock = typeof stocks.$inferInsert
 export type Event = typeof events.$inferSelect
@@ -69,3 +84,5 @@ export type Vote = typeof votes.$inferSelect
 export type NewVote = typeof votes.$inferInsert
 export type Placement = typeof placements.$inferSelect
 export type NewPlacement = typeof placements.$inferInsert
+export type UserPreference = typeof userPreferences.$inferSelect
+export type NewUserPreference = typeof userPreferences.$inferInsert
