@@ -8,6 +8,7 @@ import EventModal from '@/components/EventModal'
 import EventPool from '@/components/EventPool'
 import EventPoolDrawer from '@/components/EventPoolDrawer'
 import StockSearchBar from '@/components/StockSearchBar'
+import StockChart from '@/components/StockChart'
 import { ensureUserId } from '@/lib/auth'
 import seedEvents from '@/data/seed-events.json'
 import stocksData from '@/data/stocks.json'
@@ -171,13 +172,22 @@ export default function TickerCalendarPage() {
             </div>
           </div>
         ) : (
-          <CalendarGrid
-            events={events}
-            userId={userId!}
-            filters={filters}
-            userVotes={votes}
-            onEventClick={setSelectedEventId}
-          />
+          <>
+            <CalendarGrid
+              events={events}
+              userId={userId!}
+              filters={filters}
+              userVotes={votes}
+              onEventClick={setSelectedEventId}
+            />
+
+            {/* Stock Price Chart - only shown on ticker pages */}
+            {stockInfo && (
+              <div className="mt-8 max-w-5xl mx-auto px-4">
+                <StockChart ticker={ticker.toUpperCase()} />
+              </div>
+            )}
+          </>
         )}
       </div>
 

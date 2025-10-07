@@ -236,12 +236,652 @@ async function seedDefaultEvents() {
         affectedTickers: ['HOOD'],
         isFixedDate: 'true'
       },
+
+      // ============ COMPREHENSIVE FEDERAL RESERVE & ECONOMIC DATA (OCT 2025 - JUN 2026) ============
+
+      // OCTOBER 2025
+      {
+        title: 'CPI Report - September',
+        description: 'Consumer Price Index for September 2025. Key inflation gauge tracked by Federal Reserve.',
+        eventDate: new Date('2025-10-10T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'PPI Report - September',
+        description: 'Producer Price Index for September 2025. Measures wholesale inflation.',
+        eventDate: new Date('2025-10-11T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'Beige Book Release',
+        description: 'Federal Reserve Beige Book summary of economic conditions ahead of October FOMC meeting.',
+        eventDate: new Date('2025-10-15T14:00:00'),
+        category: 'fed_policy',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'FOMC Interest Rate Decision',
+        description: 'Federal Open Market Committee announces October rate decision.',
+        eventDate: new Date('2025-10-29T14:00:00'),
+        category: 'fed_policy',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'GDP Q3 2025 Advance Estimate',
+        description: 'First estimate of Q3 2025 GDP growth rate. Key measure of economic health.',
+        eventDate: new Date('2025-10-30T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'PCE Report - September',
+        description: 'Personal Consumption Expenditures for September 2025. Fed\'s preferred inflation gauge.',
+        eventDate: new Date('2025-10-31T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+
+      // NOVEMBER 2025
+      {
+        title: 'Jobs Report - October',
+        description: 'Non-farm payrolls and unemployment rate for October 2025.',
+        eventDate: new Date('2025-11-07T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'PPI Report - October',
+        description: 'Producer Price Index for October 2025. Measures wholesale inflation.',
+        eventDate: new Date('2025-11-14T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'FOMC Minutes Release',
+        description: 'Minutes from October 28-29 FOMC meeting. Details policy discussions and economic outlook.',
+        eventDate: new Date('2025-11-19T14:00:00'),
+        category: 'fed_policy',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'Beige Book Release',
+        description: 'Federal Reserve Beige Book summary of economic conditions ahead of December FOMC meeting.',
+        eventDate: new Date('2025-11-26T14:00:00'),
+        category: 'fed_policy',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'GDP Q3 2025 Second Estimate',
+        description: 'Second estimate of Q3 2025 GDP growth rate with revised data.',
+        eventDate: new Date('2025-11-26T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'PCE Report - October',
+        description: 'Personal Consumption Expenditures for October 2025. Fed\'s preferred inflation gauge.',
+        eventDate: new Date('2025-11-26T10:00:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'FOMC Minutes Release',
+        description: 'Minutes from November 6-7 FOMC meeting. Details policy discussions and economic outlook.',
+        eventDate: new Date('2025-11-26T14:00:00'),
+        category: 'fed_policy',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+
+      // DECEMBER 2025
+      {
+        title: 'Jobs Report - November',
+        description: 'Non-farm payrolls and unemployment rate for November 2025.',
+        eventDate: new Date('2025-12-05T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'CPI Report - November',
+        description: 'Consumer Price Index for November 2025. Key inflation gauge tracked by Federal Reserve.',
+        eventDate: new Date('2025-12-10T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'PPI Report - November',
+        description: 'Producer Price Index for November 2025. Measures wholesale inflation.',
+        eventDate: new Date('2025-12-12T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'Retail Sales - November',
+        description: 'US retail sales data for November 2025. Critical holiday shopping indicator.',
+        eventDate: new Date('2025-12-16T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'FOMC Interest Rate Decision',
+        description: 'Federal Open Market Committee announces December rate decision with updated economic projections and dot plot.',
+        eventDate: new Date('2025-12-18T14:00:00'),
+        category: 'fed_policy',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'GDP Q3 2025 Final Estimate',
+        description: 'Final estimate of Q3 2025 GDP growth rate.',
+        eventDate: new Date('2025-12-19T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'PCE Report - November',
+        description: 'Personal Consumption Expenditures for November 2025. Fed\'s preferred inflation gauge.',
+        eventDate: new Date('2025-12-19T10:00:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+
+      // JANUARY 2026
+      {
+        title: 'FOMC Minutes Release',
+        description: 'Minutes from December 17-18 FOMC meeting. Details policy discussions and 2026 outlook.',
+        eventDate: new Date('2026-01-08T14:00:00'),
+        category: 'fed_policy',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'Jobs Report - December',
+        description: 'Non-farm payrolls and unemployment rate for December 2025.',
+        eventDate: new Date('2026-01-09T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'CPI Report - December',
+        description: 'Consumer Price Index for December 2025. Key inflation gauge tracked by Federal Reserve.',
+        eventDate: new Date('2026-01-14T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'Beige Book Release',
+        description: 'Federal Reserve Beige Book summary of economic conditions ahead of January FOMC meeting.',
+        eventDate: new Date('2026-01-14T14:00:00'),
+        category: 'fed_policy',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'PPI Report - December',
+        description: 'Producer Price Index for December 2025. Measures wholesale inflation.',
+        eventDate: new Date('2026-01-15T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'Retail Sales - December',
+        description: 'US retail sales data for December 2025. Final holiday shopping report.',
+        eventDate: new Date('2026-01-16T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'FOMC Interest Rate Decision',
+        description: 'Federal Open Market Committee announces January 2026 rate decision. First meeting of the year.',
+        eventDate: new Date('2026-01-28T14:00:00'),
+        category: 'fed_policy',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'GDP Q4 2025 Advance Estimate',
+        description: 'First estimate of Q4 2025 GDP growth rate.',
+        eventDate: new Date('2026-01-29T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'PCE Report - December',
+        description: 'Personal Consumption Expenditures for December 2025. Fed\'s preferred inflation gauge.',
+        eventDate: new Date('2026-01-30T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+
+      // FEBRUARY 2026
+      {
+        title: 'Jobs Report - January',
+        description: 'Non-farm payrolls and unemployment rate for January 2026.',
+        eventDate: new Date('2026-02-06T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'CPI Report - January',
+        description: 'Consumer Price Index for January 2026. Key inflation gauge tracked by Federal Reserve.',
+        eventDate: new Date('2026-02-13T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'PPI Report - January',
+        description: 'Producer Price Index for January 2026. Measures wholesale inflation.',
+        eventDate: new Date('2026-02-14T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'Retail Sales - January',
+        description: 'US retail sales data for January 2026. Post-holiday consumer spending indicator.',
+        eventDate: new Date('2026-02-17T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'FOMC Minutes Release',
+        description: 'Minutes from January 27-28 FOMC meeting. Details policy discussions and economic outlook.',
+        eventDate: new Date('2026-02-18T14:00:00'),
+        category: 'fed_policy',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'GDP Q4 2025 Second Estimate',
+        description: 'Second estimate of Q4 2025 GDP growth rate with revised data.',
+        eventDate: new Date('2026-02-26T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'PCE Report - January',
+        description: 'Personal Consumption Expenditures for January 2026. Fed\'s preferred inflation gauge.',
+        eventDate: new Date('2026-02-27T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+
+      // MARCH 2026
+      {
+        title: 'Beige Book Release',
+        description: 'Federal Reserve Beige Book summary of economic conditions ahead of March FOMC meeting.',
+        eventDate: new Date('2026-03-04T14:00:00'),
+        category: 'fed_policy',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'Jobs Report - February',
+        description: 'Non-farm payrolls and unemployment rate for February 2026.',
+        eventDate: new Date('2026-03-06T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'CPI Report - February',
+        description: 'Consumer Price Index for February 2026. Key inflation gauge tracked by Federal Reserve.',
+        eventDate: new Date('2026-03-11T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'PPI Report - February',
+        description: 'Producer Price Index for February 2026. Measures wholesale inflation.',
+        eventDate: new Date('2026-03-13T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'Retail Sales - February',
+        description: 'US retail sales data for February 2026. Consumer spending indicator.',
+        eventDate: new Date('2026-03-16T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'FOMC Interest Rate Decision',
+        description: 'Federal Open Market Committee announces March 2026 rate decision.',
+        eventDate: new Date('2026-03-18T14:00:00'),
+        category: 'fed_policy',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'GDP Q4 2025 Final Estimate',
+        description: 'Final estimate of Q4 2025 GDP growth rate.',
+        eventDate: new Date('2026-03-26T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'PCE Report - February',
+        description: 'Personal Consumption Expenditures for February 2026. Fed\'s preferred inflation gauge.',
+        eventDate: new Date('2026-03-27T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+
+      // APRIL 2026
+      {
+        title: 'Jobs Report - March',
+        description: 'Non-farm payrolls and unemployment rate for March 2026.',
+        eventDate: new Date('2026-04-03T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'FOMC Minutes Release',
+        description: 'Minutes from March 17-18 FOMC meeting. Details policy discussions and economic outlook.',
+        eventDate: new Date('2026-04-08T14:00:00'),
+        category: 'fed_policy',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'CPI Report - March',
+        description: 'Consumer Price Index for March 2026. Key inflation gauge tracked by Federal Reserve.',
+        eventDate: new Date('2026-04-10T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'PPI Report - March',
+        description: 'Producer Price Index for March 2026. Measures wholesale inflation.',
+        eventDate: new Date('2026-04-14T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'Beige Book Release',
+        description: 'Federal Reserve Beige Book summary of economic conditions ahead of April FOMC meeting.',
+        eventDate: new Date('2026-04-15T14:00:00'),
+        category: 'fed_policy',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'Retail Sales - March',
+        description: 'US retail sales data for March 2026. Consumer spending indicator.',
+        eventDate: new Date('2026-04-15T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'FOMC Interest Rate Decision',
+        description: 'Federal Open Market Committee announces April 2026 rate decision.',
+        eventDate: new Date('2026-04-29T14:00:00'),
+        category: 'fed_policy',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'GDP Q1 2026 Advance Estimate',
+        description: 'First estimate of Q1 2026 GDP growth rate.',
+        eventDate: new Date('2026-04-29T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'PCE Report - March',
+        description: 'Personal Consumption Expenditures for March 2026. Fed\'s preferred inflation gauge.',
+        eventDate: new Date('2026-04-30T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+
+      // MAY 2026
+      {
+        title: 'Jobs Report - April',
+        description: 'Non-farm payrolls and unemployment rate for April 2026.',
+        eventDate: new Date('2026-05-08T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'CPI Report - April',
+        description: 'Consumer Price Index for April 2026. Key inflation gauge tracked by Federal Reserve.',
+        eventDate: new Date('2026-05-12T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'PPI Report - April',
+        description: 'Producer Price Index for April 2026. Measures wholesale inflation.',
+        eventDate: new Date('2026-05-14T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'Retail Sales - April',
+        description: 'US retail sales data for April 2026. Consumer spending indicator.',
+        eventDate: new Date('2026-05-15T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'FOMC Minutes Release',
+        description: 'Minutes from April 28-29 FOMC meeting. Details policy discussions and economic outlook.',
+        eventDate: new Date('2026-05-20T14:00:00'),
+        category: 'fed_policy',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'GDP Q1 2026 Second Estimate',
+        description: 'Second estimate of Q1 2026 GDP growth rate with revised data.',
+        eventDate: new Date('2026-05-28T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'PCE Report - April',
+        description: 'Personal Consumption Expenditures for April 2026. Fed\'s preferred inflation gauge.',
+        eventDate: new Date('2026-05-29T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+
+      // JUNE 2026
+      {
+        title: 'Beige Book Release',
+        description: 'Federal Reserve Beige Book summary of economic conditions ahead of June FOMC meeting.',
+        eventDate: new Date('2026-06-03T14:00:00'),
+        category: 'fed_policy',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'Jobs Report - May',
+        description: 'Non-farm payrolls and unemployment rate for May 2026.',
+        eventDate: new Date('2026-06-05T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'CPI Report - May',
+        description: 'Consumer Price Index for May 2026. Key inflation gauge tracked by Federal Reserve.',
+        eventDate: new Date('2026-06-10T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'PPI Report - May',
+        description: 'Producer Price Index for May 2026. Measures wholesale inflation.',
+        eventDate: new Date('2026-06-12T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'Retail Sales - May',
+        description: 'US retail sales data for May 2026. Consumer spending indicator.',
+        eventDate: new Date('2026-06-16T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'FOMC Interest Rate Decision',
+        description: 'Federal Open Market Committee announces June 2026 rate decision with updated economic projections.',
+        eventDate: new Date('2026-06-17T14:00:00'),
+        category: 'fed_policy',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'GDP Q1 2026 Final Estimate',
+        description: 'Final estimate of Q1 2026 GDP growth rate.',
+        eventDate: new Date('2026-06-25T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
+      {
+        title: 'PCE Report - May',
+        description: 'Personal Consumption Expenditures for May 2026. Fed\'s preferred inflation gauge.',
+        eventDate: new Date('2026-06-26T08:30:00'),
+        category: 'economic_data',
+        impactScope: 'market',
+        affectedTickers: [],
+        isFixedDate: 'true'
+      },
     ]
 
-    // Insert all events
-    const inserted = await db.insert(events).values(defaultEvents).returning()
+    // Insert events in batches to avoid parameter limit
+    const batchSize = 20
+    const inserted = []
 
-    console.log(`✅ Inserted ${inserted.length} default events:`)
+    for (let i = 0; i < defaultEvents.length; i += batchSize) {
+      const batch = defaultEvents.slice(i, i + batchSize)
+      const batchResult = await db.insert(events).values(batch).returning()
+      inserted.push(...batchResult)
+      console.log(`  Inserted batch ${Math.floor(i / batchSize) + 1} (${batchResult.length} events)`)
+    }
+
+    console.log(`✅ Inserted ${inserted.length} default events total:`)
     console.log('\n📅 Federal Reserve Meetings: 3')
     console.log('📊 Economic Data Releases: 6')
     console.log('💼 Tech Earnings Reports: 7')

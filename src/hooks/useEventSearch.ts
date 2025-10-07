@@ -22,6 +22,7 @@ export function useEventSearch(events: Event[], filters: EventFilters) {
       const matchesCategory = filters.category === 'all' || event.category === filters.category
       const matchesScope = filters.scope === 'all' || event.impact_scope === filters.scope
       const matchesTicker = !filters.ticker ||
+        event.impact_scope === 'market' ||
         event.primary_ticker?.toLowerCase().includes(filters.ticker.toLowerCase()) ||
         event.affected_tickers.some(t => t.toLowerCase().includes(filters.ticker.toLowerCase()))
 

@@ -2,7 +2,7 @@
 
 import { Event } from '@/lib/types'
 import { useState, useEffect, useRef, useMemo } from 'react'
-import { startOfMonth, endOfMonth, eachDayOfInterval, format, isSameDay, startOfWeek, endOfWeek, isToday } from 'date-fns'
+import { startOfMonth, endOfMonth, eachDayOfInterval, format, isSameDay, startOfWeek, endOfWeek, isToday, addMonths, subMonths } from 'date-fns'
 import EventBlock from './EventBlock'
 import { EventFilters } from '@/hooks/useEventSearch'
 
@@ -20,7 +20,7 @@ interface Placement {
 }
 
 export default function CalendarGrid({ events, userId, filters, userVotes, onEventClick }: Props) {
-  const [currentDate] = useState(new Date())
+  const [currentDate, setCurrentDate] = useState(new Date())
   const [focusedDay, setFocusedDay] = useState<Date | null>(null)
   const [placements, setPlacements] = useState<Placement[]>([])
   const [dragOverDay, setDragOverDay] = useState<Date | null>(null)
@@ -38,6 +38,7 @@ export default function CalendarGrid({ events, userId, filters, userVotes, onEve
       const matchesCategory = filters.category === 'all' || event.category === filters.category
       const matchesScope = filters.scope === 'all' || event.impact_scope === filters.scope
       const matchesTicker = !filters.ticker ||
+        event.impact_scope === 'market' ||
         event.primary_ticker?.toLowerCase().includes(filters.ticker.toLowerCase()) ||
         event.affected_tickers.some(t => t.toLowerCase().includes(filters.ticker.toLowerCase()))
 
@@ -182,10 +183,86 @@ export default function CalendarGrid({ events, userId, filters, userVotes, onEve
     onEventClick?.(id)
   }
 
+  const handlePrevMonth = () => {
+    setCurrentDate(prev => subMonths(prev, 1))
+    setFocusedDay(null)
+  }
+
+  const handleNextMonth = () => {
+    setCurrentDate(prev => addMonths(prev, 1))
+    setFocusedDay(null)
+  }
+
+  const handleToday = () => {
+    setCurrentDate(new Date())
+    setFocusedDay(null)
+  }
+
   return (
     <div className="max-w-5xl mx-auto px-4">
-      <div className="mb-4 text-xl font-semibold">
-        {format(currentDate, 'MMMM yyyy')}
+      {/* Calendar Header with Navigation */}
+      <div className="mb-6">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+            {format(currentDate, 'MMMM yyyy')}
+          </h2>
+
+          <div className="flex items-center gap-2">
+            {/* Today Button */}
+            <button
+              onClick={handleToday}
+              className="px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+              aria-label="Go to today"
+            >
+              Today
+            </button>
+
+            {/* Navigation Buttons */}
+            <div className="flex items-center gap-1 border border-gray-300 rounded-lg overflow-hidden">
+              <button
+                onClick={handlePrevMonth}
+                className="p-2 md:p-2.5 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 transition-colors group"
+                aria-label="Previous month"
+              >
+                <svg
+                  className="h-5 w-5 text-gray-600 group-hover:text-gray-900"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+              </button>
+
+              <div className="w-px h-6 bg-gray-300" />
+
+              <button
+                onClick={handleNextMonth}
+                className="p-2 md:p-2.5 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 transition-colors group"
+                aria-label="Next month"
+              >
+                <svg
+                  className="h-5 w-5 text-gray-600 group-hover:text-gray-900"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div ref={gridRef} className="grid grid-cols-7 gap-1 md:gap-2">
