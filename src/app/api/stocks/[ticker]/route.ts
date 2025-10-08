@@ -4,9 +4,9 @@ import { stocks } from '@/lib/db/schema'
 import { eq, sql } from 'drizzle-orm'
 
 interface RouteParams {
-  params: {
+  params: Promise<{
     ticker: string
-  }
+  }>
 }
 
 export async function GET(
@@ -14,7 +14,7 @@ export async function GET(
   { params }: RouteParams
 ) {
   try {
-    const { ticker } = params
+    const { ticker } = await params
 
     if (!ticker) {
       return NextResponse.json({
