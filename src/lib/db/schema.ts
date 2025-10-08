@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, uuid, index, primaryKey } from 'drizzle-orm/pg-core'
+import { pgTable, text, timestamp, uuid, index, primaryKey, numeric } from 'drizzle-orm/pg-core'
 
 export const stocks = pgTable('stocks', {
   id: uuid('id').primaryKey().defaultRandom(),
@@ -76,6 +76,39 @@ export const userPreferences = pgTable('user_preferences', {
   userIdIdx: index('user_id_idx').on(table.userId),
 }))
 
+export const userPortfolios = pgTable('user_portfolios', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  userId: text('user_id').notNull(),
+  brokerName: text('broker_name').notNull(), // 'robinhood' | 'td_ameritrade' | 'etrade' | 'manual'
+  accessTokenEncrypted: text('access_token_encrypted'),
+  refreshTokenEncrypted: text('refresh_token_encrypted'),
+  tokenExpiresAt: timestamp('token_expires_at', { withTimezone: true }),
+  connectionStatus: text('connection_status').notNull().default('connected'), // 'connected' | 'disconnected' | 'error'
+  lastSyncAt: timestamp('last_sync_at', { withTimezone: true }),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => ({
+  userIdIdx: index('portfolio_user_id_idx').on(table.userId),
+  brokerNameIdx: index('broker_name_idx').on(table.brokerName),
+  connectionStatusIdx: index('connection_status_idx').on(table.connectionStatus),
+  userBrokerIdx: index('user_broker_idx').on(table.userId, table.brokerName),
+}))
+
+export const portfolioHoldings = pgTable('portfolio_holdings', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  portfolioId: uuid('portfolio_id').notNull().references(() => userPortfolios.id, { onDelete: 'cascade' }),
+  ticker: text('ticker').notNull(),
+  quantity: numeric('quantity', { precision: 18, scale: 8 }).notNull(),
+  costBasis: numeric('cost_basis', { precision: 18, scale: 2 }),
+  currentValue: numeric('current_value', { precision: 18, scale: 2 }),
+  lastUpdated: timestamp('last_updated', { withTimezone: true }).defaultNow().notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (table) => ({
+  portfolioIdIdx: index('portfolio_id_idx').on(table.portfolioId),
+  tickerIdx: index('holding_ticker_idx').on(table.ticker),
+  portfolioTickerIdx: index('portfolio_ticker_idx').on(table.portfolioId, table.ticker),
+}))
+
 export type Stock = typeof stocks.$inferSelect
 export type NewStock = typeof stocks.$inferInsert
 export type Event = typeof events.$inferSelect
@@ -86,3 +119,7 @@ export type Placement = typeof placements.$inferSelect
 export type NewPlacement = typeof placements.$inferInsert
 export type UserPreference = typeof userPreferences.$inferSelect
 export type NewUserPreference = typeof userPreferences.$inferInsert
+export type UserPortfolio = typeof userPortfolios.$inferSelect
+export type NewUserPortfolio = typeof userPortfolios.$inferInsert
+export type PortfolioHolding = typeof portfolioHoldings.$inferSelect
+export type NewPortfolioHolding = typeof portfolioHoldings.$inferInsert
