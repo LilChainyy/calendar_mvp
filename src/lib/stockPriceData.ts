@@ -1,8 +1,22 @@
-import { subDays, format } from 'date-fns'
+import { subDays, format, addDays, isWeekend, parseISO } from 'date-fns'
 
 export interface PriceDataPoint {
   date: string
   price: number
+}
+
+export interface OHLCDataPoint {
+  date: string
+  open: number
+  high: number
+  low: number
+  close: number
+  volume?: number
+}
+
+export interface ProjectionDataPoint {
+  date: string
+  projectedPrice: number
 }
 
 // Base prices for different stocks (realistic as of Oct 2025)
@@ -131,4 +145,97 @@ export function getPriceChange(ticker: string): { change: number; changePercent:
     change: parseFloat(change.toFixed(2)),
     changePercent: parseFloat(changePercent.toFixed(2))
   }
+}
+
+/**
+ * Generate OHLC candlestick data from July 1, 2025 to today
+ * @param ticker - The stock ticker symbol
+ * @returns Array of OHLC data points (excluding weekends)
+ */
+export function generateOHLCData(ticker: string): OHLCDataPoint[] {
+  const basePrice = basePrices[ticker] || 100
+  const data: OHLCDataPoint[] = []
+
+  // Start date: July 1, 2025
+  const startDate = new Date(2025, 6, 1) // Month is 0-indexed
+  const today = new Date()
+
+  let currentDate = new Date(startDate)
+  let lastClose = basePrice * 0.85 // Start a bit lower to show growth
+
+  while (currentDate <= today) {
+    // Skip weekends
+    if (!isWeekend(currentDate)) {
+      // Volatility for NVDA is higher
+      const volatility = ticker === 'NVDA' ? 0.03 :
+                        ticker === 'TSLA' || ticker === 'AMD' ? 0.025 : 0.015
+
+      // Generate daily movement
+      const dailyChange = (Math.random() - 0.47) * volatility // Slight upward bias
+      const open = lastClose
+
+      // Generate high and low based on intraday volatility
+      const intradayVolatility = volatility * 0.5
+      const high = open * (1 + Math.abs(Math.random() * intradayVolatility))
+      const low = open * (1 - Math.abs(Math.random() * intradayVolatility))
+      const close = open * (1 + dailyChange)
+
+      // Ensure high is highest and low is lowest
+      const actualHigh = Math.max(high, open, close)
+      const actualLow = Math.min(low, open, close)
+
+      data.push({
+        date: format(currentDate, 'yyyy-MM-dd'),
+        open: parseFloat(open.toFixed(2)),
+        high: parseFloat(actualHigh.toFixed(2)),
+        low: parseFloat(actualLow.toFixed(2)),
+        close: parseFloat(close.toFixed(2)),
+        volume: Math.floor(Math.random() * 100000000) + 50000000 // Random volume
+      })
+
+      lastClose = close
+    }
+
+    currentDate = addDays(currentDate, 1)
+  }
+
+  return data
+}
+
+/**
+ * Generate projection data from tomorrow to Dec 31, 2025
+ * @param ticker - The stock ticker symbol
+ * @param ohlcData - Historical OHLC data to base projection on
+ * @returns Array of projection data points (excluding weekends) - flat line at current price
+ */
+export function generateProjectionData(
+  ticker: string,
+  ohlcData: OHLCDataPoint[]
+): ProjectionDataPoint[] {
+  if (ohlcData.length === 0) return []
+
+  const data: ProjectionDataPoint[] = []
+  const lastPrice = ohlcData[ohlcData.length - 1].close
+
+  // Start from tomorrow
+  const tomorrow = addDays(new Date(), 1)
+  // End date: December 31, 2025
+  const endDate = new Date(2025, 11, 31) // Month is 0-indexed
+
+  let currentDate = new Date(tomorrow)
+
+  while (currentDate <= endDate) {
+    // Skip weekends
+    if (!isWeekend(currentDate)) {
+      // Flat line projection at the last closing price
+      data.push({
+        date: format(currentDate, 'yyyy-MM-dd'),
+        projectedPrice: lastPrice
+      })
+    }
+
+    currentDate = addDays(currentDate, 1)
+  }
+
+  return data
 }
