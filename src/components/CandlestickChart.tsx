@@ -3,6 +3,8 @@
 import { useMemo, useState, useEffect } from 'react'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import { generateOHLCData, generateProjectionData, OHLCDataPoint, ProjectionDataPoint } from '@/lib/stockPriceData'
+import { getTopNewsForDateAndTicker } from '@/lib/news-events'
+import { NewsEvent } from '@/types/news'
 import { format, parseISO } from 'date-fns'
 
 interface CandlestickChartProps {
@@ -25,20 +27,35 @@ export default function CandlestickChart({ ticker }: CandlestickChartProps) {
 
   // Combine data for the chart - use only closing prices
   const combinedData = useMemo(() => {
-    const historical = ohlcData.map(d => ({
-      date: d.date,
-      price: d.close,
-      type: 'historical' as const
-    }))
+    const historical = ohlcData.map(d => {
+      // Check if this date has news events
+      const newsForDate = getTopNewsForDateAndTicker(d.date, ticker, 10) // Get all events for this date
+      const hasNews = newsForDate.length > 0
+
+      // Calculate net sentiment (sum of impact scores)
+      const netSentiment = newsForDate.reduce((sum, event) => sum + event.impactScore, 0)
+
+      return {
+        date: d.date,
+        price: d.close,
+        type: 'historical' as const,
+        hasNews,
+        newsCount: newsForDate.length,
+        netSentiment
+      }
+    })
 
     const projection = projectionData.map(d => ({
       date: d.date,
       projectedPrice: d.projectedPrice,
-      type: 'projection' as const
+      type: 'projection' as const,
+      hasNews: false,
+      newsCount: 0,
+      netSentiment: 0
     }))
 
     return [...historical, ...projection]
-  }, [ohlcData, projectionData])
+  }, [ohlcData, projectionData, ticker])
 
   // Get current price and stats
   const currentPrice = ohlcData.length > 0 ? ohlcData[ohlcData.length - 1].close : 0
@@ -90,15 +107,59 @@ export default function CandlestickChart({ ticker }: CandlestickChartProps) {
     if (active && payload && payload.length) {
       const data = payload[0].payload
 
+      // Get news events for this date
+      const newsEvents = data.date ? getTopNewsForDateAndTicker(data.date, ticker, 3) : []
+
       if (data.type === 'historical') {
         return (
-          <div className="bg-white border border-gray-200 rounded-lg shadow-lg p-3">
+          <div className="bg-white border border-gray-200 rounded-lg shadow-lg p-3 max-w-sm">
             <p className="text-sm text-gray-600 mb-1">
               {formatTooltipDate(data.date)}
             </p>
-            <p className="text-lg font-semibold text-gray-900">
+            <p className="text-lg font-semibold text-gray-900 mb-3">
               ${data.price.toFixed(2)}
             </p>
+
+            {/* News Events Section */}
+            {newsEvents.length > 0 && (
+              <div className="border-t border-gray-200 pt-3 mt-2">
+                <div className="flex items-center gap-1 mb-2">
+                  <span className="text-base">📰</span>
+                  <span className="text-xs font-semibold text-gray-700">
+                    Top {newsEvents.length} Event{newsEvents.length > 1 ? 's' : ''}
+                  </span>
+                </div>
+                <div className="space-y-2">
+                  {newsEvents.map((event, index) => (
+                    <div key={event.id} className="text-xs">
+                      <div className="flex items-start gap-1">
+                        <span className="text-gray-400 mt-0.5">{index + 1}.</span>
+                        <div className="flex-1">
+                          <p className={`font-medium leading-tight ${
+                            event.impact === 'bullish' ? 'text-green-700' :
+                            event.impact === 'bearish' ? 'text-red-700' :
+                            'text-gray-700'
+                          }`}>
+                            {event.headline}
+                          </p>
+                          <div className="flex items-center gap-1 mt-0.5">
+                            <span className={`text-xs font-semibold ${
+                              event.impact === 'bullish' ? 'text-green-600' :
+                              event.impact === 'bearish' ? 'text-red-600' :
+                              'text-gray-500'
+                            }`}>
+                              {event.impactScore > 0 ? '+' : ''}{event.impactScore}
+                            </span>
+                            <span className="text-gray-400">·</span>
+                            <span className="text-gray-500 capitalize text-xs">{event.category}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         )
       } else if (data.type === 'projection') {
@@ -132,6 +193,39 @@ export default function CandlestickChart({ ticker }: CandlestickChartProps) {
     } catch {
       return ''
     }
+  }
+
+  // Custom dot component for showing news events
+  const CustomDot = (props: any) => {
+    const { cx, cy, payload } = props
+
+    // Only render dot if this date has news events
+    if (!payload.hasNews) {
+      return null
+    }
+
+    // Determine dot color based on net sentiment
+    let fillColor = '#f59e0b' // Yellow/orange for neutral (default)
+    if (payload.netSentiment > 0) {
+      fillColor = '#10b981' // Green for bullish
+    } else if (payload.netSentiment < 0) {
+      fillColor = '#ef4444' // Red for bearish
+    }
+
+    return (
+      <circle
+        cx={cx}
+        cy={cy}
+        r={6}
+        fill={fillColor}
+        stroke="white"
+        strokeWidth={2}
+        style={{
+          filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))',
+          cursor: 'pointer'
+        }}
+      />
+    )
   }
 
   return (
@@ -205,7 +299,7 @@ export default function CandlestickChart({ ticker }: CandlestickChartProps) {
               dataKey="price"
               stroke="#3b82f6"
               strokeWidth={2}
-              dot={false}
+              dot={<CustomDot />}
               isAnimationActive={false}
               connectNulls
             />
