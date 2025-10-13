@@ -3,7 +3,7 @@
 import { useMemo, useState, useEffect } from 'react'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import { generateOHLCData, generateProjectionData, OHLCDataPoint, ProjectionDataPoint } from '@/lib/stockPriceData'
-import { getTopNewsForDateAndTicker } from '@/lib/news-events'
+import { getTopNewsForDateAndTicker, getNewsEventsByTicker } from '@/lib/news-events'
 import { NewsEvent } from '@/types/news'
 import { format, parseISO } from 'date-fns'
 
@@ -30,16 +30,18 @@ export default function CandlestickChart({ ticker }: CandlestickChartProps) {
     const historical = ohlcData.map(d => {
       // Check if this date has news events
       const newsForDate = getTopNewsForDateAndTicker(d.date, ticker, 10) // Get all events for this date
-      const hasNews = newsForDate.length > 0
+      const hasActualNews = newsForDate.length > 0
 
       // Calculate net sentiment (sum of impact scores)
-      const netSentiment = newsForDate.reduce((sum, event) => sum + event.impactScore, 0)
+      const netSentiment = hasActualNews
+        ? newsForDate.reduce((sum, event) => sum + event.impactScore, 0)
+        : 1 // Default to 1 (green) for dates without news
 
       return {
         date: d.date,
         price: d.close,
         type: 'historical' as const,
-        hasNews,
+        hasNews: true, // Always show dot
         newsCount: newsForDate.length,
         netSentiment
       }
@@ -49,9 +51,9 @@ export default function CandlestickChart({ ticker }: CandlestickChartProps) {
       date: d.date,
       projectedPrice: d.projectedPrice,
       type: 'projection' as const,
-      hasNews: false,
+      hasNews: true, // Show green dots on all future dates
       newsCount: 0,
-      netSentiment: 0
+      netSentiment: 1 // Green for all future dates by default
     }))
 
     return [...historical, ...projection]
@@ -197,10 +199,20 @@ export default function CandlestickChart({ ticker }: CandlestickChartProps) {
 
   // Custom dot component for showing news events
   const CustomDot = (props: any) => {
-    const { cx, cy, payload } = props
+    const { cx, cy, payload, dataKey } = props
 
     // Only render dot if this date has news events
     if (!payload.hasNews) {
+      return null
+    }
+
+    // Don't render if this is the wrong line for this data point
+    // Historical line (dataKey="price") should only render for historical data
+    // Projection line (dataKey="projectedPrice") should only render for projection data
+    if (dataKey === 'price' && payload.type !== 'historical') {
+      return null
+    }
+    if (dataKey === 'projectedPrice' && payload.type !== 'projection') {
       return null
     }
 
@@ -311,7 +323,7 @@ export default function CandlestickChart({ ticker }: CandlestickChartProps) {
               stroke="#9ca3af"
               strokeWidth={2}
               strokeDasharray="5 5"
-              dot={false}
+              dot={<CustomDot />}
               isAnimationActive={false}
               connectNulls
             />
@@ -334,6 +346,61 @@ export default function CandlestickChart({ ticker }: CandlestickChartProps) {
         <p className="text-xs text-gray-500 mt-2">
           Historical price data is simulated for demonstration purposes. Projections are illustrative only and not financial advice.
         </p>
+      </div>
+
+      {/* News Events Timeline */}
+      <div className="mt-6 pt-6 border-t border-gray-200">
+        <h3 className="text-lg font-bold text-gray-900 mb-4">News Events Timeline</h3>
+        <div className="space-y-3">
+          {getNewsEventsByTicker(ticker)
+            .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+            .map((event) => {
+              // Determine indicator color based on impact
+              let indicatorColor = 'bg-yellow-500'
+              let textColor = 'text-gray-700'
+              let scoreColor = 'text-gray-600'
+
+              if (event.impact === 'bullish') {
+                indicatorColor = 'bg-green-500'
+                textColor = 'text-green-700'
+                scoreColor = 'text-green-600'
+              } else if (event.impact === 'bearish') {
+                indicatorColor = 'bg-red-500'
+                textColor = 'text-red-700'
+                scoreColor = 'text-red-600'
+              }
+
+              return (
+                <div key={event.id} className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                  <div className="flex items-start gap-3">
+                    {/* Indicator Dot */}
+                    <div className={`w-3 h-3 rounded-full ${indicatorColor} mt-1 flex-shrink-0`}></div>
+
+                    {/* Event Details */}
+                    <div className="flex-1 min-w-0">
+                      {/* Date and Category */}
+                      <div className="flex flex-wrap items-center gap-2 mb-2">
+                        <span className="text-xs font-semibold text-gray-900 bg-white px-2 py-1 rounded">
+                          {formatTooltipDate(event.date)}
+                        </span>
+                        <span className="text-xs text-gray-500 capitalize bg-white px-2 py-1 rounded">
+                          {event.category}
+                        </span>
+                        <span className={`text-xs font-bold ${scoreColor}`}>
+                          {event.impactScore > 0 ? '+' : ''}{event.impactScore}
+                        </span>
+                      </div>
+
+                      {/* Headline */}
+                      <p className={`text-sm font-medium ${textColor} leading-snug`}>
+                        {event.headline}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+        </div>
       </div>
     </div>
   )
